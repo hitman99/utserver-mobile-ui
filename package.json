@@ -1,0 +1,35 @@
+{
+  "name": "utserver-mobile-ui",
+  "description": "Mobile UI written in ReactJS for utserver (Utorrent server for linux), because the mobile UI \r shipped with utserver sucks and is not usable.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -d --watch --progress",
+    "build": "webpack --progress -p",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hitman99/utserver-mobile-ui.git"
+  },
+  "keywords": [
+    "utserver"
+  ],
+  "author": "tomas@adomavicius.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hitman99/utserver-mobile-ui/issues"
+  },
+  "homepage": "https://github.com/hitman99/utserver-mobile-ui#readme",
+  "dependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "express": "^4.14.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": "^2.2.1"
+  }
+}

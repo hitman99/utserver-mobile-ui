@@ -15,9 +15,14 @@ What things you need to run the software
 
 ### Installing
 
-1. `npm run build`
-2. `npm start`
+Just run `npm install`
 
+### Starting server
+Just run `npm start`
+
+### Developing
+Open two consoles, cd into project dir. On one console run `npm run dev`, on the other `npm start`. 
+Now you can develop and have javascript bundled on-the-fly
 
 ## Authors
 
