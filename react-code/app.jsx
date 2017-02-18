@@ -6,21 +6,28 @@ import comms from './modules/comms';
 class App extends React.Component {
     constructor(props){
         super(props);
-        var srv_comm = new comms();
+        this.srv_comm = new comms();
         this.state = {
-            counter : 0
+            free_disk_space: 0
         };
-        setInterval( () => { this.setState({counter: this.state.counter + 100 });}, 100 );
-        srv_comm.getServerDiskSpace().then(function(data){
-            console.log(data);
-        });
-    }
+    };
 
+    get_info(){
+        this.srv_comm.getServerDiskSpace()
+            .then(function(res){
+                this.setState({
+                    free_disk_space: (res.data.disk_info.free / 1024 / 1024 / 1024).toFixed(2)
+                });
+            }.bind(this));
+    }
+    componentDidMount(){
+        this.get_info();
+    }
     render() {
         return(
             <div>
                 <h1> Hello world! </h1>
-                <h3>Seconds passed since page load: { (this.state.counter / 1000).toFixed(1) }s</h3>
+                Free disk space: { this.state.free_disk_space } GB
             </div>
         );
     }

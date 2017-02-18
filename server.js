@@ -9,14 +9,13 @@ app.use(express.static(path.join(__dirname, 'public/static/')));
 
 app.get('/', function (req, res) {
     res.redirect('/index.html');
-    //res.send('Hello World!')
 })
 
 app.get('/rest/serverinfo/:what', function(req, res){
     switch(req.params.what){
         case 'disk-space':
             res.send({
-                data: disk.checkSync('D:')
+                disk_info: disk.checkSync('C:')
             });
             break;
         case 'get_something_else':
