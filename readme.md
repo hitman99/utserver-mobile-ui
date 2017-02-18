@@ -10,12 +10,17 @@ shipped with utserver sucks and is not usable.
 
 What things you need to run the software
 
-1. `node` - This is everything you'll need for this project
+1. Install NodeJS
+
+On Windows, after installing NodeJS, run the following
+1. `npm install --global --production windows-build-tools`
+2. `npm install --global node-gyp`, which is required by diskusage package
 
 
 ### Installing
 
-Just run `npm install`
+1. `npm install`
+
 
 ### Starting server
 Just run `npm start`

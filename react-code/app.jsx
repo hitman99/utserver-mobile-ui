@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class Hello extends React.Component {
+import comm from './modules/comm';
+
+class App extends React.Component {
     constructor(props){
         super(props);
-
+        var srv_comm = new comm();
         this.state = {
             counter : 0
         };
         setInterval( () => { this.setState({counter: this.state.counter + 100 });}, 100 );
+        srv_comm.getServerDiskSpace().then(function(data){
+            console.log(data);
+        });
     }
 
     render() {
@@ -21,4 +26,4 @@ class Hello extends React.Component {
     }
 }
 
-ReactDOM.render(<Hello/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
