@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import comm from './modules/comm';
+import comms from './modules/comms';
 
 class App extends React.Component {
     constructor(props){
         super(props);
-        var srv_comm = new comm();
+        var srv_comm = new comms();
         this.state = {
             counter : 0
         };

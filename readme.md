@@ -13,6 +13,7 @@ What things you need to run the software
 1. Install NodeJS
 
 On Windows, after installing NodeJS, run the following
+
 1. `npm install --global --production windows-build-tools`
 2. `npm install --global node-gyp`, which is required by diskusage package
 
