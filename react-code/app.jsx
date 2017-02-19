@@ -1,36 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import comms from './modules/comms';
+import { Header, Container, Segment, Label } from 'semantic-ui-react';
+
+import ServerStatus from './modules/server-status';
 
 class App extends React.Component {
     constructor(props){
         super(props);
-        this.srv_comm = new comms();
         this.state = {
-            free_disk_space: 0
+            free_disk_space: 0,
         };
     };
 
-    get_info(){
-        this.srv_comm.getServerDiskSpace()
-            .then(function(res){
-                this.setState({
-                    free_disk_space: (res.data.disk_info.free / 1024 / 1024 / 1024).toFixed(2)
-                });
-            }.bind(this));
-    }
-    componentDidMount(){
-        this.get_info();
-    }
     render() {
         return(
-            <div>
-                <h1> Hello world! </h1>
-                Free disk space: { this.state.free_disk_space } GB
-            </div>
+            <Container text="center" className="center-container">
+                <Header as='h1' textAlign="center">
+                    Home Torrents
+                </Header>
+                <ServerStatus />
+            </Container>
         );
-    }
+    };
 }
 
 ReactDOM.render(<App/>, document.getElementById('root'));

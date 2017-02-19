@@ -25,4 +25,7 @@ module.exports = {
             debug: true
         })
     ],
+    resolve: {
+        extensions: ['.js', '.jsx']
+    }
 };
