@@ -15,19 +15,15 @@ class App extends React.Component {
 
     render() {
         return(
-            <Grid centered padded /*columns={ 10 }*/>
-                <Grid.Row>
-                    <Grid.Column /*width={2}*/>
+            <Grid container centered>
+
+                    <Grid.Column>
                         <Header as='h1' textAlign="center">
                             Home Torrents
                         </Header>
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                    <Grid.Column /*width={2}*/>
                         <ServerStatus />
                     </Grid.Column>
-                </Grid.Row>
+
             </Grid>
         );
     };

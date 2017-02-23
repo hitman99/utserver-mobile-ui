@@ -74,7 +74,7 @@ export default class ServerStatus extends React.Component {
         }*/
         //
         return (
-          <Segment loading={this.state.loading} textAlign='center'>
+          <Segment loading={this.state.loading} /*textAlign='center'*/>
               <List horizontal>
                   <List.Item className="srv-info-item">
                       <Icon name="disk outline" color={ this.state.disk_space.color } size="big" />
