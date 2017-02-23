@@ -6,6 +6,7 @@ import React from 'react';
 import Comms from './comms';
 
 import { Segment, Dimmer, Loader, List, Icon } from 'semantic-ui-react';
+import { Doughnut } from 'react-chartjs-2';
 
 export default class ServerStatus extends React.Component {
     constructor(props){
@@ -17,6 +18,7 @@ export default class ServerStatus extends React.Component {
             },
             disk_space: {
                 free: null,
+                total: null,
                 color: 'black'
             },
             loading: true
@@ -28,6 +30,7 @@ export default class ServerStatus extends React.Component {
         this.backend.getServerDiskSpace()
             .then(function(res){
                 let free = (res.data.disk_info.free / 1024 / 1024 / 1024).toFixed(2);
+                let total = (res.data.disk_info.total / 1024 / 1024 / 1024).toFixed(2);
                 let color = 'green';
                 if(free < 100){
                     color = 'yellow';
@@ -38,6 +41,7 @@ export default class ServerStatus extends React.Component {
                 this.setState({
                     disk_space: {
                         free: free,
+                        total: total,
                         color: color
                     },
                     loading: false
@@ -46,24 +50,47 @@ export default class ServerStatus extends React.Component {
     };
 
     render(){
+        /*var chart_data = {
+            labels: [
+                'Used',
+                'Free',
+
+            ],
+            datasets: [{
+                data: [ this.state.disk_space.total, this.state.disk_space.free],
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                ],
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                ],
+            }]
+        };
+        let chart;
+        if(!this.state.loading){
+            chart = <Doughnut data={ chart_data } height={ 50 } width={ 50 } />;
+        }*/
+        //
         return (
           <Segment loading={this.state.loading} textAlign='center'>
               <List horizontal>
                   <List.Item className="srv-info-item">
                       <Icon name="disk outline" color={ this.state.disk_space.color } size="big" />
                       <List.Content textAlign="left">
-                          <List.Header>Disk space</List.Header>
+                          <List.Header>Free: { this.state.disk_space.free } GB</List.Header>
                           <List.Description>
-                              Free: { this.state.disk_space.free } GB
+                              Disk space
                           </List.Description>
                       </List.Content>
                   </List.Item>
                   <List.Item className="srv-info-item">
                       <Icon name="idea" color={ this.state.online_status.color } size="big" />
                       <List.Content>
-                          <List.Header>Server status</List.Header>
+                          <List.Header>{ this.state.online_status.text }</List.Header>
                           <List.Description>
-                              { this.state.online_status.text }
+                              Server status
                           </List.Description>
                       </List.Content>
                   </List.Item>
