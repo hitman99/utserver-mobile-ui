@@ -1,5 +1,6 @@
 import React from 'react';
 import { Header, Grid, Button, Container } from 'semantic-ui-react';
+import { browserHistory } from 'react-router';
 
 export default class TorrentList extends React.Component {
     constructor(props){
@@ -10,6 +11,7 @@ export default class TorrentList extends React.Component {
 
         return(
             <div>
+                <Button basic inverted icon='left chevron' onClick={browserHistory.goBack}  />
                 <Container  className='v-align'>
                     <Grid centered doubling>
                         <Grid.Row>
@@ -17,8 +19,6 @@ export default class TorrentList extends React.Component {
                                 <Header inverted as='h1' textAlign="center">
                                     Torrent list
                                 </Header>
-
-
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

@@ -56,9 +56,9 @@ export default class ServerStatus extends React.Component {
                   <List.Item className="srv-info-item">
                       <Icon name="disk outline" color={ this.state.disk_space.color } size="big" />
                       <List.Content textAlign="left">
-                          <List.Header>Free: { this.state.disk_space.free } GB</List.Header>
+                          <List.Header>{ this.state.disk_space.free } GB</List.Header>
                           <List.Description>
-                              Disk space
+                              Free disk space
                           </List.Description>
                       </List.Content>
                   </List.Item>
