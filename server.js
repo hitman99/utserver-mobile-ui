@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, 'public/static/')));
 
 app.get('/', function (req, res) {
     res.redirect('/index.html');
-})
+});
 
 app.get('/rest/serverinfo/:what', function(req, res){
     switch(req.params.what){
@@ -28,6 +28,16 @@ app.get('/rest/serverinfo/:what', function(req, res){
             break;
     }
 });
+
+
+/**
+ * Catch all and redirect to index for Raect to handle
+ *
+ */
+app.get('/*', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'public/static/', 'index.html'));
+});
+
 
 app.listen(cfg.port, cfg.address, function () {
     console.log('Example app listening on port ' + cfg.address + ':' + cfg.port + '!');

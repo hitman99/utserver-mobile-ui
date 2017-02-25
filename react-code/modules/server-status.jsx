@@ -5,8 +5,7 @@
 import React from 'react';
 import Comms from './comms';
 
-import { Segment, Dimmer, Loader, List, Icon } from 'semantic-ui-react';
-import { Doughnut } from 'react-chartjs-2';
+import { Segment, Dimmer, Loader, List, Icon, Header } from 'semantic-ui-react';
 
 export default class ServerStatus extends React.Component {
     constructor(props){
@@ -50,31 +49,9 @@ export default class ServerStatus extends React.Component {
     };
 
     render(){
-        /*var chart_data = {
-            labels: [
-                'Used',
-                'Free',
 
-            ],
-            datasets: [{
-                data: [ this.state.disk_space.total, this.state.disk_space.free],
-                backgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                ],
-                hoverBackgroundColor: [
-                    '#FF6384',
-                    '#36A2EB',
-                ],
-            }]
-        };
-        let chart;
-        if(!this.state.loading){
-            chart = <Doughnut data={ chart_data } height={ 50 } width={ 50 } />;
-        }*/
-        //
         return (
-          <Segment loading={this.state.loading} /*textAlign='center'*/>
+          <Segment loading={this.state.loading} >
               <List horizontal>
                   <List.Item className="srv-info-item">
                       <Icon name="disk outline" color={ this.state.disk_space.color } size="big" />
