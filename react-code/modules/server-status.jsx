@@ -13,7 +13,8 @@ export default class ServerStatus extends React.Component {
         this.state = {
             online_status: {
                 text: 'Offline',
-                color: 'red'
+                color: 'red',
+                state: false
             },
             disk_space: {
                 free: null,
@@ -25,9 +26,13 @@ export default class ServerStatus extends React.Component {
 
     };
 
+    get_status(){
+        return this.state;
+    }
+
     componentDidMount(){
         axios.get('/rest/serverinfo/disk-space')
-            .then(function(res){
+            .then((res) => {
                 let free = (res.data.disk_info.free / 1024 / 1024 / 1024).toFixed(2);
                 let total = (res.data.disk_info.total / 1024 / 1024 / 1024).toFixed(2);
                 let color = 'green';
@@ -45,7 +50,17 @@ export default class ServerStatus extends React.Component {
                     },
                     loading: false
                 });
-            }.bind(this));
+            });
+        axios.get('/rest/serverinfo/utserver-status')
+            .then((res) => {
+                this.setState({
+                    online_status: {
+                        text: (res.data.status == 'alive' ? 'Online' : 'Offline'),
+                        color: (res.data.status == 'alive' ? 'green' : 'red'),
+                        state: (res.data.status == 'alive')
+                    }
+                })
+            });
     };
 
     render(){

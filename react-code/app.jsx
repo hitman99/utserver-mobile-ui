@@ -13,7 +13,15 @@ import Torrent from './modules/torrent-list-item';
 class App extends React.Component {
     constructor(props){
         super(props);
+
     };
+
+    componentDidMount(){
+    }
+
+    shouldShowList(){
+        return this.server_status.state.online_status.state;
+    }
 
     render() {
         return(
@@ -25,13 +33,13 @@ class App extends React.Component {
                                 Home Torrents
                             </Header>
 
-                            <ServerStatus />
+                            <ServerStatus ref={(server_status) => {this.server_status = server_status;}} />
 
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                         <Grid.Column mobile={12}>
-                            <Button fluid size='big' inverted basic onClick={() => this.props.router.push("list")} >
+                            <Button fluid size='big' inverted basic onClick={ () =>  this.props.router.push("list") } >
                                 Torrent list
                             </Button>
                         </Grid.Column>

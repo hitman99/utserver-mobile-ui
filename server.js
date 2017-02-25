@@ -23,8 +23,13 @@ app.get('/rest/serverinfo/:what', function(req, res){
                 disk_info: disk.checkSync('C:')
             });
             break;
-        case 'get_something_else':
-            res.send({});
+        case 'utserver-status':
+            run_cmd('ls', ['-al'], function (data) {
+                res.send({
+                    status: 'alive'
+                });
+            })
+
             break;
         default:
             res.send({
@@ -81,19 +86,13 @@ function objectify_torrents(list){
             added: item[23]
         }
     });
-    /*
-     if($torrent[1] >= 136){
-     $item = array(
-     'status' => $torrent[21],
-     'progress' => $torrent[4] / 10,
-     'name' => $torrent[2],
-     'peers' => $torrent[13],
-     'seeds' => $torrent[15],
-     'hash' => $torrent[0],
-     'download_speed' => number_format($torrent[9] / 1024 / 1024, 2),
-     'added' => $torrent[23]
-     );
-     array_push($result['list'], $item);
-     }
-     * */
+}
+
+function run_cmd(cmd, args, callback ) {
+    var spawn = require('child_process').spawn;
+    var child = spawn(cmd, args);
+    var resp = "";
+
+    child.stdout.on('data', function (buffer) { resp += buffer.toString() });
+    child.stdout.on('end', function() { callback (resp) });
 }
