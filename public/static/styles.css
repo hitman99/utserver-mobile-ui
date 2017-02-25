@@ -1,6 +1,3 @@
-.center-container {
-    padding-top: 20px;
-}
 .srv-info-item {
     text-align: left;
 }
@@ -13,9 +10,18 @@ html, body {
     background: linear-gradient(179deg, rgba(153,218,255,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99DAFF', endColorstr='#008080',GradientType=0 ); /* ie6-9 */
     height: 100%;
-    width: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
+#root {
+
+}
 .v-align {
-    padding-top: 50%;
+    padding-top: 10%;
+    height: 100%;
+    width: 100%;
+    display: table;
+    vertical-align: middle;
 }

@@ -8,23 +8,20 @@ import ServerStatus from './modules/server-status';
 import ServerControls from './modules/server-controls';
 import TorrentList from './modules/torrent-list';
 import NotFound from './modules/not-found';
+import Torrent from './modules/torrent-list-item';
 
 class App extends React.Component {
     constructor(props){
         super(props);
     };
 
-    to_url(url){
-        this.props.router.push(url);
-    }
-
     render() {
         return(
             <Container className='v-align'>
                 <Grid centered doubling>
                     <Grid.Row>
-                        <Grid.Column>
-                            <Header inverted as='h1' textAlign="center">
+                        <Grid.Column verticalAlign="middle">
+                            <Header inverted as='h1'>
                                 Home Torrents
                             </Header>
 
@@ -34,14 +31,14 @@ class App extends React.Component {
                     </Grid.Row>
                     <Grid.Row>
                         <Grid.Column mobile={12}>
-                            <Button fluid size='big' inverted basic onClick={() => this.to_url("list")} >
+                            <Button fluid size='big' inverted basic onClick={() => this.props.router.push("list")} >
                                 Torrent list
                             </Button>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                         <Grid.Column mobile={12}>
-                            <Button fluid size='big' inverted basic onClick={() => this.to_url("controls")}>
+                            <Button fluid size='big' inverted basic onClick={() => this.props.router.push("controls")}>
                                 Server controls
                             </Button>
                         </Grid.Column>
@@ -55,8 +52,9 @@ class App extends React.Component {
 ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App} />
-            <Route path="/list" component={TorrentList} />
-            <Route path="/controls" component={ServerControls} />
+        <Route path="/list" component={TorrentList} />
+        <Route path="/list/:itemName" component={Torrent} />
+        <Route path="/controls" component={ServerControls} />
         <Route path="/*" component={NotFound} />
 
     </Router>, document.getElementById('root'));
