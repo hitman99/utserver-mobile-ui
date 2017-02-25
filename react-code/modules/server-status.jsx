@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import Comms from './comms';
+import axios from 'axios';
 
 import { Segment, Dimmer, Loader, List, Icon, Header } from 'semantic-ui-react';
 
@@ -22,11 +22,11 @@ export default class ServerStatus extends React.Component {
             },
             loading: true
         };
-        this.backend = new Comms();
+
     };
 
     componentDidMount(){
-        this.backend.getServerDiskSpace()
+        axios.get('/rest/serverinfo/disk-space')
             .then(function(res){
                 let free = (res.data.disk_info.free / 1024 / 1024 / 1024).toFixed(2);
                 let total = (res.data.disk_info.total / 1024 / 1024 / 1024).toFixed(2);
