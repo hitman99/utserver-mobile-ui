@@ -10,7 +10,7 @@ export default class TorrentList extends React.Component {
             torrent_list: [],
             loading: true,
             rendering: {
-                show_only_active: true
+                show_only_active: false
             }
         }
         this.get_torrent_list();
@@ -42,17 +42,24 @@ export default class TorrentList extends React.Component {
                 return !this.state.rendering.show_only_active ||
                     this.state.rendering.show_only_active && item.status != 'Finished';
             }).map((item) => {
-                let sss;
-                return (
-                    <List.Item inverted onClick={ () => this.props.router.push("/list/some-shit") }>
-                        <List.Content>
-                            <List.Header>
+                let header, description;
+                if(item.progress != 100){
+                    header = <List.Header>
                                 <Progress percent={ item.progress } inverted color='orange' label size="small"
                                           active={item.progress != 100} >
                                     { item.download_speed } MB/s
                                 </Progress>
                             </List.Header>
-                            <List.Description> { item.name }</List.Description>
+                    description = <List.Description> { item.name }</List.Description>;
+                }
+                else{
+                    header = <List.Header> { item.name } </List.Header>
+                }
+                return (
+                    <List.Item inverted onClick={ () => this.props.router.push("/list/some-shit") }>
+                        <List.Content>
+                            { header }
+                            { description }
                         </List.Content>
                     </List.Item>
                 );
@@ -84,7 +91,7 @@ export default class TorrentList extends React.Component {
 
                     { loader }
 
-                    <Grid doubling>
+                    <Grid verticalAlign='middle'>
                         <Grid.Row centered>
                             <Grid.Column>
                                 <Header inverted as='h1' textAlign="center">
@@ -92,14 +99,19 @@ export default class TorrentList extends React.Component {
                                 </Header>
                             </Grid.Column>
                         </Grid.Row>
-                        <Grid.Row >
-                            <Grid.Column>
-                                <Checkbox toggle label="Show only active" checked={this.state.rendering.show_only_active}
+                        <Grid.Row columns={2}>
+                            <Grid.Column >
+                                <Checkbox toggle label="Only active" checked={this.state.rendering.show_only_active}
                                 onChange={ () => this.setState({
                                     rendering: {
                                         show_only_active: !this.state.rendering.show_only_active
                                     }
                                 }) } />
+                            </Grid.Column>
+                            <Grid.Column  >
+                                <Button basic inverted >
+                                    <Icon name='add square' /> Add torrent
+                                </Button>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
