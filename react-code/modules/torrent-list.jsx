@@ -56,7 +56,15 @@ export default class TorrentList extends React.Component {
                     header = <List.Header> { item.name } </List.Header>
                 }
                 return (
-                    <List.Item inverted onClick={ () => this.props.router.push("/list/some-shit") }>
+                    <List.Item inverted onClick={ () => this.props.router.push(
+                        {
+                            pathname: "/list/" + item.hash,
+                            state: {
+                                name: item.name,
+                                hash: item.hash
+                            }
+                        })
+                    }>
                         <List.Content>
                             { header }
                             { description }

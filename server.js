@@ -39,7 +39,7 @@ app.get('/rest/serverinfo/:what', function(req, res){
     }
 });
 
-app.get('/rest/torrents/:what', function(req, res){
+app.get('/rest/torrents/:what/:hash?', function(req, res){
     switch(req.params.what){
         case 'list':
             utorrent.call('list', function(err, torrents_list) {
@@ -50,6 +50,21 @@ app.get('/rest/torrents/:what', function(req, res){
                     res.send((torrents_list != null ? objectify_torrents(torrents_list.torrents) : []));
                 }
             });
+            break;
+        case 'files':
+            utorrent.call('getfiles', {'hash': req.params.hash}, function(err, data) {
+                if(err) {
+                    res.send({
+                        files: []
+                    });
+                }
+                else{
+                    res.send({
+                        files: data.files[1]
+                    });
+                }
+            });
+
             break;
         default:
             res.send({

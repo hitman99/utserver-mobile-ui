@@ -61,7 +61,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
         <Route path="/" component={App} />
         <Route path="/list" component={TorrentList} />
-        <Route path="/list/:itemName" component={Torrent} />
+        <Route path="/list/:hash" component={Torrent} />
         <Route path="/controls" component={ServerControls} />
         <Route path="/*" component={NotFound} />
 
