@@ -41,7 +41,9 @@ app.get('/rest/torrents/:what', function(req, res){
                 if(err) {
                     res.send([]);
                 }
-                res.send((torrents_list != null ? objectify_torrents(torrents_list.torrents) : []));
+                else{
+                    res.send((torrents_list != null ? objectify_torrents(torrents_list.torrents) : []));
+                }
             });
             break;
         default:

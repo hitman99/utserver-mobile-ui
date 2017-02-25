@@ -13,6 +13,7 @@ html, body {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    overflow: auto;
 }
 
 #root {
