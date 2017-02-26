@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"No tests yet...\" && exit 0",
     "dev": "webpack --devtool source-map --watch --progress",
-    "build": "webpack --progress -p",
+    "build": "webpack -p",
     "start": "node server.js"
   },
   "repository": {

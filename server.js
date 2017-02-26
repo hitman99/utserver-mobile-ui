@@ -20,7 +20,7 @@ app.get('/rest/serverinfo/:what', function(req, res){
     switch(req.params.what){
         case 'disk-space':
             res.send({
-                disk_info: disk.checkSync('C:')
+                disk_info: disk.checkSync(cfg.destination_dir)
             });
             break;
         case 'utserver-status':

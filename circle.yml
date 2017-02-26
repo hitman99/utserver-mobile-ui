@@ -11,11 +11,10 @@ deployment:
     branch: master
     commands:
       - tar -czf app.tar.gz public server.js package.json
-      - scp -r app.tar.gz circleci@hitman.lt:~/utserver-mobile-ui/
+      - scp -r app.tar.gz circleci@hitman.lt:/opt/utserver-mobile-ui/
       - >
         ssh -q -t circleci@hitman.lt '
         cd ~/utserver-mobile-ui/ &&
         tar -xzf app.tar.gz &&
-        npm install &&
         rm app.tar.gz &&
         forever start server.js'
