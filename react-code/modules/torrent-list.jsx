@@ -11,13 +11,16 @@ export default class TorrentList extends React.Component {
             loading: true,
             rendering: {
                 show_only_active: false
-            }
+            },
+            active_torrent_hashes: []
         }
         this.get_torrent_list();
     }
 
     get_torrent_list() {
         axios.get('/rest/torrents/list').then((res) => {
+            // save active ones
+            ;
 
             this.setState({
                 loading: false,
@@ -29,9 +32,13 @@ export default class TorrentList extends React.Component {
                         return -1;
                     }
                     return 0;
-                })
+                }),
+                active_torrent_hashes: res.data.filter((item) => { return item.status != 'Finished'; })
             });
         });
+    }
+
+    refresh_active_torrents(){
 
     }
 
