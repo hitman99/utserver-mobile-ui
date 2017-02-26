@@ -1,5 +1,9 @@
 # utserver Mobile UI
 
+
+[![CircleCI](https://circleci.com/gh/hitman99/utserver-mobile-ui/tree/master.svg?style=svg)](https://circleci.com/gh/hitman99/utserver-mobile-ui/tree/master)
+
+
 Mobile UI written in ReactJS for utserver (Utorrent server for linux), because the mobile UI 
 shipped with utserver sucks and is not usable. 
 
