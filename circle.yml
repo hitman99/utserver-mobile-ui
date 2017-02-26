@@ -14,7 +14,7 @@ deployment:
       - scp -r app.tar.gz circleci@hitman.lt:/opt/utserver-mobile-ui/
       - >
         ssh -q -t circleci@hitman.lt '
-        cd ~/utserver-mobile-ui/ &&
+        cd /opt/utserver-mobile-ui/ &&
         tar -xzf app.tar.gz &&
         rm app.tar.gz &&
         forever start server.js'
