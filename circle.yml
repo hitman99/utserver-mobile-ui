@@ -1,0 +1,5 @@
+deployment:
+  master:
+    branch: master
+    commands:
+      - scp -r utserver-mobile-ui/* circleci@hitman.lt:/utserver-mobile-ui/
