@@ -1,5 +1,19 @@
+machine:
+  node:
+    version: 6.1
+
+compile:
+  override:
+    - npm run build
+
 deployment:
   master:
     branch: master
     commands:
-      - scp -r * circleci@hitman.lt:~/utserver-mobile-ui/
+      - tar -czvf app.tar.gz node_modules public server.js package.json
+      - scp -r app.tar.gz circleci@hitman.lt:~/utserver-mobile-ui/
+      - >
+        ssh -q -t -i circleci@hitman.lt '
+        cd ~/ut-server-mobile-ui/ &&
+        tar -xzvf app.tar.gz &&
+        rm app.tar.gz'
