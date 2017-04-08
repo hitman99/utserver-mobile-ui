@@ -27,5 +27,9 @@ module.exports = {
     ],
     resolve: {
         extensions: ['.js', '.jsx']
+    },
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
     }
 };

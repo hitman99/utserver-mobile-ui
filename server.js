@@ -39,6 +39,29 @@ app.get('/rest/serverinfo/:what', function(req, res){
     }
 });
 
+app.post('/rest/servercontrol/:what', function(req, res){
+    switch(req.params.what){
+        case 'start':
+            res.send({
+                status: 'alive'
+            });
+            break;
+        case 'stop':
+            run_cmd('ls', ['-al'], function (data) {
+                res.send({
+                    status: 'dead'
+                });
+            })
+
+            break;
+        default:
+            res.send({
+                data: 'Nothing'
+            });
+            break;
+    }
+});
+
 app.get('/rest/torrents/:what/:hash?', function(req, res){
     switch(req.params.what){
         case 'list':

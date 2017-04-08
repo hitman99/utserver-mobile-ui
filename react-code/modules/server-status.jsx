@@ -4,6 +4,7 @@
 
 import React from 'react';
 import axios from 'axios';
+import ServerControls from './server-controls';
 
 import { Segment, Dimmer, Loader, List, Icon, Header } from 'semantic-ui-react';
 
@@ -23,14 +24,18 @@ export default class ServerStatus extends React.Component {
             },
             loading: true
         };
-
+        this.serverControls = new ServerControls();
     };
 
     get_status(){
-        return this.state;
+        return this.state.online_status;
     }
 
-    componentDidMount(){
+    refresh(){
+        this.fetch_data();
+    }
+
+    fetch_data(){
         axios.get('/rest/serverinfo/disk-space')
             .then((res) => {
                 let free = (res.data.disk_info.free / 1024 / 1024 / 1024).toFixed(2);
@@ -51,7 +56,7 @@ export default class ServerStatus extends React.Component {
                     loading: false
                 });
             });
-        axios.get('/rest/serverinfo/utserver-status')
+        this.serverControls.getServerStatus()
             .then((res) => {
                 this.setState({
                     online_status: {
@@ -61,6 +66,10 @@ export default class ServerStatus extends React.Component {
                     }
                 })
             });
+    }
+
+    componentDidMount(){
+        this.fetch_data();
     };
 
     render(){
