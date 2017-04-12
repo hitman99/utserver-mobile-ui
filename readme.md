@@ -14,15 +14,18 @@ shipped with utserver sucks and is not usable.
 
 What things you need to run the software
 
+#### Windows
+
 1. Install NodeJS
+2. `npm install --global --production windows-build-tools`
+3. `npm install --global node-gyp`, which is required by diskusage package
 
-On Windows, after installing NodeJS, run the following
+#### Linux 
+1. `curl --silent --location https://rpm.nodesource.com/setup_7.x | bash -`
+2. ` yum install -y nodejs`
+3. `yum install -y gcc-c++ make`
 
-1. `npm install --global --production windows-build-tools`
-2. `npm install --global node-gyp`, which is required by diskusage package
-
-
-### Installing
+### Installing utserver-mobile-ui
 
 1. `npm install`
 
