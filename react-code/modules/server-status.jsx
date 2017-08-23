@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import ServerControls from './server-controls';
 
@@ -25,6 +26,7 @@ export default class ServerStatus extends React.Component {
             loading: true
         };
         this.serverControls = new ServerControls();
+        this.fetch_data();
     };
 
     get_status(){
@@ -57,20 +59,19 @@ export default class ServerStatus extends React.Component {
                 });
             });
         this.serverControls.getServerStatus()
-            .then((res) => {
+            .then((data) => {
                 this.setState({
                     online_status: {
-                        text: (res.data.status == 'alive' ? 'Online' : 'Offline'),
-                        color: (res.data.status == 'alive' ? 'green' : 'red'),
-                        state: (res.data.status == 'alive')
+                        text: (data.status == 'alive' ? 'Online' : 'Offline'),
+                        color: (data.status == 'alive' ? 'green' : 'red'),
+                        state: (data.status == 'alive')
                     }
-                })
+                });
+                if(this.props.onUpdate){
+                    this.props.onUpdate(data.status);
+                }
             });
     }
-
-    componentDidMount(){
-        this.fetch_data();
-    };
 
     render(){
 
@@ -99,4 +100,11 @@ export default class ServerStatus extends React.Component {
           </Segment>
         );
     }
+}
+
+ServerStatus.propTypes = {
+    onUpdate: PropTypes.function
+}
+ServerStatus.defaultProps = {
+    onUpdate: null
 }

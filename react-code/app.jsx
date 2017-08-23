@@ -21,16 +21,8 @@ class App extends React.Component {
         this.serverControls = new ServerControls();
     };
 
-    componentDidMount(){
-        this.serverControls.getServerStatus()
-            .then( (response) => {
-                this.setState({
-                    server: response.data.status
-                });
-            })
-            .catch( (error) => {
-
-            } );
+    __update_status(status){
+        this.setState({ server: status });
     }
 
     stop_server(){
@@ -81,7 +73,8 @@ class App extends React.Component {
                                 Home Torrents
                             </Header>
 
-                            <ServerStatus ref={ (server_status) => {this._serverStatus = server_status; } } />
+                            <ServerStatus ref={ (server_status) => {this._serverStatus = server_status; } }
+                                          onUpdate={this.__update_status.bind(this)} />
 
                         </Grid.Column>
                     </Grid.Row>
@@ -95,7 +88,7 @@ class App extends React.Component {
                     <Grid.Row>
                         <Grid.Column mobile={12}>
                             <Button fluid size='big' inverted basic onClick={ () =>  this.start_server() }
-                                    disabled={ (this.state.server == 'alive' || this.state.server == 'unknown' ? 'disabled' : false) }
+                                    disabled={ this.state.server == 'alive' || this.state.server == 'unknown' }
                                     loading={this.state.server_starting} >
                                 Start Server
                             </Button>
@@ -104,7 +97,7 @@ class App extends React.Component {
                     <Grid.Row>
                         <Grid.Column mobile={12}>
                             <Button fluid size='big' inverted basic onClick={() => this.stop_server()  }
-                                    disabled={ (this.state.server == 'dead' || this.state.server == 'unknown' ? 'disabled' : false) }
+                                    disabled={ this.state.server == 'dead' || this.state.server == 'unknown' }
                                     loading={this.state.server_stopping} >
                                 Stop Server
                             </Button>

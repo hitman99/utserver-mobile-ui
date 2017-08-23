@@ -37,6 +37,6 @@
     "semantic-ui-css": "^2.2.7",
     "semantic-ui-react": "^0.65.0",
     "utorrent-api": "latest",
-    "webpack":"latest"
+    "webpack": "latest"
   }
 }

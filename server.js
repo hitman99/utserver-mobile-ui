@@ -26,7 +26,8 @@ app.get('/rest/serverinfo/:what', function(req, res){
         case 'utserver-status':
             run_cmd('ls', ['-al'], function (data) {
                 res.send({
-                    status: 'alive'
+                    status: 'alive',
+                    data: data
                 });
             })
 
@@ -42,16 +43,23 @@ app.get('/rest/serverinfo/:what', function(req, res){
 app.post('/rest/servercontrol/:what', function(req, res){
     switch(req.params.what){
         case 'start':
+            run_cmd('scripts/start_utserver.sh', ['autokill'], function (data) {
+                res.send({
+                    status: 'dead',
+                    data: data
+                });
+            });
             res.send({
                 status: 'alive'
             });
             break;
         case 'stop':
-            run_cmd('ls', ['-al'], function (data) {
+            run_cmd('scripts/stop_utserver.sh', [], function (data) {
                 res.send({
-                    status: 'dead'
+                    status: 'dead',
+                    data: data
                 });
-            })
+            });
 
             break;
         default:

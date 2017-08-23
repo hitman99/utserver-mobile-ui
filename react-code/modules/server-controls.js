@@ -5,14 +5,38 @@ export default class ServerControls {
     }
 
     startServer(){
-        return axios.post('/rest/servercontrol/start');
+        return new Promise((resolve, reject) => {
+            axios.post('/rest/servercontrol/start')
+                .then((response)=>{
+                    resolve(response.data);
+                })
+                .catch(()=>{
+                    reject();
+                });
+        });
     }
 
     stopServer(){
-        return axios.post('/rest/servercontrol/stop');
+        return new Promise((resolve, reject) => {
+            axios.post('/rest/servercontrol/stop')
+                .then((response)=>{
+                    resolve(response.data);
+                })
+                .catch(()=>{
+                    reject();
+                });
+        });
     }
 
     getServerStatus(){
-        return axios.get('/rest/serverinfo/utserver-status');
+        return new Promise((resolve, reject) => {
+            axios.get('/rest/serverinfo/utserver-status')
+                .then((response)=>{
+                    resolve(response.data);
+                })
+                .catch(()=>{
+                    reject();
+                });
+        });
     }
 }
