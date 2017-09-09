@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"No tests yet...\" && exit 0",
+    "test": "jest",
     "dev": "webpack --devtool source-map --watch --progress",
     "build": "webpack -p",
     "start": "node server.js"
@@ -39,5 +39,12 @@
     "semantic-ui-react": "^0.65.0",
     "utorrent-api": "latest",
     "webpack": "latest"
+  },
+  "devDependencies": {
+    "jest": "^21.0.2",
+    "supertest": "^3.0.0"
+  },
+  "jest": {
+    "transform": {".*": "babel-jest"}
   }
 }

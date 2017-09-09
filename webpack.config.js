@@ -1,8 +1,8 @@
 var webpack = require('webpack');
 
 module.exports = {
-    entry: './react-code/app.jsx',
-    output: { path: __dirname + '/public/static/', filename: 'bundle.js' },
+    entry: './src/react/app.jsx',
+    output: { path: __dirname + '/src/express/public/static/', filename: 'bundle.js' },
     module: {
         loaders: [
             {
