@@ -12,19 +12,19 @@ export default class TorrentList extends React.Component {
             rendering: {
                 show_only_active: false
             },
-            active_torrent_hashes: []
+            active_torrent_hashes: [],
+            refresh_handle: null
         }
         this.get_torrent_list();
+        this.interval_handle = null;
     }
 
     get_torrent_list() {
         axios.get('/rest/torrents/list').then((res) => {
-            // save active ones
-            ;
-
+            let torrent_list = res.data;
             this.setState({
                 loading: false,
-                torrent_list: res.data.sort(function(a, b){
+                torrent_list: torrent_list.sort(function(a, b){
                     if (a.added < b.added) {
                         return 1;
                     }
@@ -34,12 +34,27 @@ export default class TorrentList extends React.Component {
                     return 0;
                 }),
                 active_torrent_hashes: res.data.filter((item) => { return item.status != 'Finished'; })
+            }, ()=>{
+                if(torrent_list.findIndex( tor => tor.progress != 100) != -1){
+                    if(this.interval_handle == null) {
+                        this.interval_handle = setInterval(() => { this.get_torrent_list() }, 3000);
+                    }
+                }
+                else{
+                    if(this.interval_handle){
+                        clearInterval(this.interval_handle);
+                    }
+                }
             });
         });
     }
 
     refresh_active_torrents(){
 
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.interval_handle);
     }
 
     render() {
@@ -86,7 +101,6 @@ export default class TorrentList extends React.Component {
                 <Grid.Row>
                     <Grid.Column>
                         <Header as='h2' inverted disabled textAlign="center">
-
                             Such empty
                         </Header>
                     </Grid.Column>
@@ -101,7 +115,7 @@ export default class TorrentList extends React.Component {
 
         return(
             <div>
-                <Button basic inverted icon='left chevron' onClick={browserHistory.goBack}  />
+
                 <Container>
 
                     { loader }
@@ -122,11 +136,6 @@ export default class TorrentList extends React.Component {
                                         show_only_active: !this.state.rendering.show_only_active
                                     }
                                 }) } />
-                            </Grid.Column>
-                            <Grid.Column  >
-                                <Button basic inverted >
-                                    <Icon name='add square' /> Add torrent
-                                </Button>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>

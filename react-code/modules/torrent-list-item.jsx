@@ -34,12 +34,12 @@ export default class TorrentListItem extends React.Component {
 
         return(
             <div>
-                <Button basic inverted icon='left chevron' onClick={browserHistory.goBack} />
+
                 <Container >
                     <Grid doubling>
                         <Grid.Row>
                             <Grid.Column>
-                                <Header inverted as='h1' textAlign="center">{this.state.name}</Header>
+                                <Header inverted dividing textAlign="justified">{this.state.name}</Header>
 
                             </Grid.Column>
                         </Grid.Row>

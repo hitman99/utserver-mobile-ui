@@ -1,6 +1,11 @@
 var express = require('express');
 var path = require('path');
+var bodyParser     =        require("body-parser");
+
 var app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 var cfg = require('./server.config.json');
 const disk = require('diskusage');
 var uClient = require('utorrent-api');
@@ -24,12 +29,11 @@ app.get('/rest/serverinfo/:what', function(req, res){
             });
             break;
         case 'utserver-status':
-            run_cmd('ls', ['-al'], function (data) {
+            run_cmd('scripts/check_server.sh', [], function (data) {
                 res.send({
-                    status: 'alive',
-                    data: data
+                    status: data.trim()
                 });
-            })
+            });
 
             break;
         default:
@@ -45,13 +49,11 @@ app.post('/rest/servercontrol/:what', function(req, res){
         case 'start':
             run_cmd('scripts/start_utserver.sh', ['autokill'], function (data) {
                 res.send({
-                    status: 'dead',
+                    status: 'alive',
                     data: data
                 });
             });
-            res.send({
-                status: 'alive'
-            });
+
             break;
         case 'stop':
             run_cmd('scripts/stop_utserver.sh', [], function (data) {
@@ -64,6 +66,7 @@ app.post('/rest/servercontrol/:what', function(req, res){
             break;
         default:
             res.send({
+                status: 'unknown',
                 data: 'Nothing'
             });
             break;
@@ -105,6 +108,32 @@ app.get('/rest/torrents/:what/:hash?', function(req, res){
     }
 });
 
+app.post('/rest/torrents/:action', function(req, res){
+    switch(req.params.action){
+        case 'add-torrent':
+            var final_url = req.body.torrent_url;
+            if(typeof cfg.LM_cookie != 'undefined' && cfg.LM_cookie != null){
+                final_url += ':COOKIE:' + cfg.LM_cookie;
+            }
+            utorrent.call('add-url', { 's' : final_url }, function(err, data){
+                if(err) {
+                    res.send({ status: 'failed'});
+                }
+                else{
+                    if(typeof data.build != 'undefined'){
+                        res.send({ status: 'success' });
+                    }
+                    else{
+                        res.send({ status: 'failed'});
+                    }
+                }
+            });
+            break;
+        default:
+            res.send('Unknown action');
+            break;
+    }
+});
 
 /**
  * Catch all and redirect to index for Raect to handle

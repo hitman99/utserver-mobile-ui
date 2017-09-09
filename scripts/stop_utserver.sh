@@ -1,6 +1,6 @@
 #!/bin/bash
-kill -9 `cat /opt/utorrent-server-alpha-v3_3/utserver.pid`
+kill -9 `cat /opt/utserver-mobile-ui/scripts/utserver.pid`
 
-rm /opt/utorrent-server-alpha-v3_3/utserver.pid
+rm /opt/utserver-mobile-ui/scripts/utserver.pid
 
 echo "stopped"

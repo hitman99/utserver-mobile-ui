@@ -18,4 +18,5 @@ deployment:
         forever stop server.js &&
         tar -xzf app.tar.gz &&
         rm app.tar.gz &&
+        chmod +x scripts/*.sh &&
         forever start server.js'
