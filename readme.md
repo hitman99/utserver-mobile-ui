@@ -9,13 +9,14 @@ shipped with utserver sucks and is not usable.
 
 ## Screenshots
 
-Main screen
-![main screen](/screenshots/index.PNG?raw=true "Main Screen")
+### Main screen
 
-Torrent list
+![main screen](/screenshots/index.PNG?raw=true)
+
+### Torrent list
 ![list](/screenshots/list.PNG?raw=true "Torrent list")
 
-Add new
+### Add new
 ![add new](/screenshots/add-new.PNG?raw=true "Add new torrent")
 
 ## Getting Started
