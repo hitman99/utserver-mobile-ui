@@ -15,7 +15,7 @@ deployment:
       - >
         ssh -q -t circleci@hitman.lt '
         cd /opt/utserver-mobile-ui/ &&
-        forever stop server.js &&
+        forever stop server.js || true &&
         tar -xzf app.tar.gz &&
         rm app.tar.gz &&
         chmod +x scripts/*.sh &&
