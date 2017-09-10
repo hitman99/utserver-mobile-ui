@@ -179,9 +179,9 @@ module.exports = app;
 
 module.exports = {
     app: app,
-    prepare_utserver: function(cfg){
+    prepare_utserver: function(config){
         var uClient = require('utorrent-api');
-        cfg = require('./../../server.config.json');
+        cfg = config;
         utorrent = new uClient(cfg.utserver.host, cfg.utserver.port);
         utorrent.setCredentials(cfg.utserver.credentials.user, cfg.utserver.credentials.password);
     }.bind(this)
