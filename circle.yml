@@ -10,7 +10,7 @@ deployment:
   master:
     branch: master
     commands:
-      - tar -czf app.tar.gz public server.js package.json
+      - tar -czf app.tar.gz src server.js package.json
       - scp -r app.tar.gz circleci@hitman.lt:/opt/utserver-mobile-ui/
       - >
         ssh -q -t circleci@hitman.lt '
