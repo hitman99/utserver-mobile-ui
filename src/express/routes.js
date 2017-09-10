@@ -7,7 +7,9 @@ var path = require('path');
 var bodyParser = require("body-parser");
 const disk = require('diskusage');
 var fs = require('fs');
-var cfg = require('./../../server.config.json');
+// If the file is not found, fallback for bare minimum for testing
+var cfg = { destination_dir: '/' };
+var utorrent = null;
 
 function objectify_torrents(list) {
     return list.filter(function (item) {
@@ -38,9 +40,7 @@ function run_cmd(cmd, args, callback) {
 }
 
 
-var uClient = require('utorrent-api');
-var utorrent = new uClient(cfg.utserver.host, cfg.utserver.port);
-utorrent.setCredentials(cfg.utserver.credentials.user, cfg.utserver.credentials.password);
+
 
 
 // Static files
@@ -176,3 +176,13 @@ app.get('/*', function (req, res) {
 });
 
 module.exports = app;
+
+module.exports = {
+    app: app,
+    prepare_utserver: function(cfg){
+        var uClient = require('utorrent-api');
+        cfg = require('./../../server.config.json');
+        utorrent = new uClient(cfg.utserver.host, cfg.utserver.port);
+        utorrent.setCredentials(cfg.utserver.credentials.user, cfg.utserver.credentials.password);
+    }.bind(this)
+};

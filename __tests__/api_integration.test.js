@@ -3,7 +3,7 @@
  */
 import request from 'supertest';
 
-import app from '../src/express/routes';
+import { app } from '../src/express/routes';
 
 describe('URL tests', () => {
     it('loads index', () => {
