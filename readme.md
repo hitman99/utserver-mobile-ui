@@ -7,6 +7,17 @@
 Mobile UI written in ReactJS for utserver (Utorrent server for linux), because the mobile UI 
 shipped with utserver sucks and is not usable. 
 
+## Screenshots
+
+Main screen
+![main screen](/screenshots/index.PNG?raw=true "Main Screen")
+
+Torrent list
+![list](/screenshots/list.PNG?raw=true "Torrent list")
+
+Add new
+![add new](/screenshots/add-new.PNG?raw=true "Add new torrent")
+
 ## Getting Started
 
 
@@ -45,4 +56,4 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-TBD
+GPL v3
