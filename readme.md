@@ -53,7 +53,6 @@ Now you can develop and have javascript bundled on-the-fly
 
 * **Tomas** - *Legacy App / NodeJS + ReactJS conversion* - [Hitman99](https://github.com/hitman99)
 
-
 ## License
 
 GPL v3
