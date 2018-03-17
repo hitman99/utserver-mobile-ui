@@ -1,10 +1,10 @@
 import React from 'react';
-import { Header, Grid, Button, Container, List } from 'semantic-ui-react';
-import { browserHistory } from 'react-router';
+import {Header, Grid, Button, Container, List} from 'semantic-ui-react';
+import {browserHistory} from 'react-router';
 import axios from 'axios';
 
 export default class TorrentListItem extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             name: this.props.location.state.name,
@@ -12,10 +12,11 @@ export default class TorrentListItem extends React.Component {
             file_list: []
         };
     };
-    componentDidMount(){
+
+    componentDidMount() {
         axios.get('/rest/torrents/files/' + this.state.hash)
             .then((res) => {
-                this.setState({ file_list: res.data.files });
+                this.setState({file_list: res.data.files});
             })
     }
 
@@ -23,36 +24,24 @@ export default class TorrentListItem extends React.Component {
         let files = this.state.file_list.map((file) =>
 
             <List.Item>
-                <List.Icon name='file' />
+                <List.Icon name='file'/>
                 <List.Content>
-                    <List.Header> { file[0] } </List.Header>
+                    <List.Header> {  file[0].length > 35 ? file[0].substr(0, 35) + '...' : file[0] } </List.Header>
                     <List.Description> Status: done </List.Description>
                 </List.Content>
             </List.Item>
-
         );
 
-        return(
+        return (
             <div>
 
-                <Container >
-                    <Grid doubling>
-                        <Grid.Row>
-                            <Grid.Column>
-                                <Header inverted dividing textAlign="justified">{this.state.name}</Header>
+                <Container>
+                    <Header inverted dividing textAlign="center">{this.state.name}</Header>
+                    <List inverted selectable>
 
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column>
-                                <List inverted selectable>
+                        {files}
 
-                                    { files }
-
-                                </List>
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
+                    </List>
                 </Container>
             </div>
         );

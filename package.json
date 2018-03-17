@@ -38,13 +38,15 @@
     "semantic-ui-css": "^2.2.7",
     "semantic-ui-react": "^0.65.0",
     "utorrent-api": "latest",
-    "webpack": "latest"
+    "webpack": "^3.11"
   },
   "devDependencies": {
     "jest": "^21.0.2",
     "supertest": "^3.0.0"
   },
   "jest": {
-    "transform": {".*": "babel-jest"}
+    "transform": {
+      ".*": "babel-jest"
+    }
   }
 }

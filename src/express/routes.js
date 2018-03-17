@@ -140,6 +140,17 @@ app.get('/rest/torrents/:what/:hash?', function (req, res) {
     }
 });
 
+app.delete('/rest/torrents/:hash', (req, res)=>{
+    utorrent.call('removedata', { hash: req.params.hash }, (err, data)=>{
+        if (err) {
+            res.send({status: 'failed', message: err.message})
+        }
+        else {
+            res.send({ status: 'success' });
+        }
+    });
+});
+
 app.post('/rest/torrents/:action', function (req, res) {
     switch (req.params.action) {
         case 'add-torrent':
